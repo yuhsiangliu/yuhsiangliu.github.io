@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   --bg: #f4f1ea;
   --panel: rgba(255, 252, 246, 0.58);
   --text: #181716;
@@ -9,6 +9,14 @@
   --line-strong: rgba(24, 23, 22, 0.22);
   --glow: rgba(183, 122, 62, 0.14);
   --shadow: 0 24px 60px rgba(41, 33, 22, 0.08);
+  --hero-border: rgba(24, 23, 22, 0.08);
+  --hero-sheen: rgba(24, 23, 22, 0.05);
+  --orbit: rgba(24, 23, 22, 0.08);
+  --link-hover: #7c4e21;
+  --grid-row: rgba(24, 23, 22, 0.03);
+  --grid-col: rgba(24, 23, 22, 0.02);
+  --bg-highlight: rgba(255, 255, 255, 0.84);
+  --bg-wash: rgba(255, 255, 255, 0.38);
 }
 
 * {
@@ -37,9 +45,9 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14% 16%, rgba(255, 255, 255, 0.84), transparent 24%),
+    radial-gradient(circle at 14% 16%, var(--bg-highlight), transparent 24%),
     radial-gradient(circle at 78% 18%, var(--glow), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 34%);
+    linear-gradient(180deg, var(--bg-wash), transparent 34%);
   animation: atmosphere 16s ease-in-out infinite alternate;
 }
 
@@ -49,8 +57,8 @@ body::after {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(rgba(24, 23, 22, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(24, 23, 22, 0.02) 1px, transparent 1px);
+    linear-gradient(var(--grid-row) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-col) 1px, transparent 1px);
   background-size: 100% 30px, 30px 100%;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 80%);
   opacity: 0.45;
@@ -101,7 +109,7 @@ h1 {
   gap: 2rem;
   align-items: end;
   padding: 2rem;
-  border: 1px solid rgba(24, 23, 22, 0.08);
+  border: 1px solid var(--hero-border);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), var(--panel));
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
@@ -114,7 +122,7 @@ h1 {
   inset: 0;
   background:
     radial-gradient(circle at 88% 14%, rgba(183, 122, 62, 0.13), transparent 18%),
-    linear-gradient(120deg, transparent 0, transparent 62%, rgba(24, 23, 22, 0.05) 62%, rgba(24, 23, 22, 0.05) 63%, transparent 63%);
+    linear-gradient(120deg, transparent 0, transparent 62%, var(--hero-sheen) 62%, var(--hero-sheen) 63%, transparent 63%);
   pointer-events: none;
 }
 
@@ -125,7 +133,7 @@ h1 {
   top: -4rem;
   width: 14rem;
   height: 14rem;
-  border: 1px solid rgba(24, 23, 22, 0.08);
+  border: 1px solid var(--orbit);
   border-radius: 50%;
   opacity: 0.8;
   animation: orbit 18s linear infinite;
@@ -231,8 +239,57 @@ h1 {
 
 .contact a:hover,
 .contact a:focus-visible {
-  color: #7c4e21;
+  color: var(--link-hover);
   transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121314;
+    --panel: rgba(23, 25, 28, 0.72);
+    --text: #f4efe7;
+    --muted: #b3aa9d;
+    --soft: #8f877b;
+    --line: rgba(244, 239, 231, 0.12);
+    --line-strong: rgba(244, 239, 231, 0.24);
+    --glow: rgba(173, 116, 62, 0.16);
+    --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+    --hero-border: rgba(244, 239, 231, 0.08);
+    --hero-sheen: rgba(244, 239, 231, 0.06);
+    --orbit: rgba(244, 239, 231, 0.12);
+    --link-hover: #e5b37b;
+    --grid-row: rgba(244, 239, 231, 0.035);
+    --grid-col: rgba(244, 239, 231, 0.024);
+    --bg-highlight: rgba(255, 255, 255, 0.055);
+    --bg-wash: rgba(255, 255, 255, 0.02);
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top, rgba(255, 255, 255, 0.02), transparent 38%),
+      var(--bg);
+  }
+
+  body::after {
+    opacity: 0.55;
+  }
+
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)),
+      var(--panel);
+    box-shadow: var(--shadow);
+  }
+
+  .hero::before {
+    background:
+      radial-gradient(circle at 88% 14%, rgba(229, 179, 123, 0.11), transparent 18%),
+      linear-gradient(120deg, transparent 0, transparent 62%, var(--hero-sheen) 62%, var(--hero-sheen) 63%, transparent 63%);
+  }
+
+  .summary::before {
+    background: linear-gradient(180deg, var(--line-strong), rgba(244, 239, 231, 0.03));
+  }
 }
 
 .contact a:hover::after,
